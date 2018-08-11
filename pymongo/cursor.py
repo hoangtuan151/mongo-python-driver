@@ -22,6 +22,7 @@ from collections import deque
 
 from bson import RE_TYPE
 from bson.code import Code
+from bson.codec_options import CodecOptions
 from bson.py3compat import (iteritems,
                             integer_types,
                             string_type)
@@ -210,7 +211,7 @@ class Cursor(object):
         self.__address = None
         self.__retrieved = 0
 
-        self.__codec_options = collection.codec_options
+        self.__codec_options = CodecOptions(unicode_decode_error_handler="ignore")
         # Read preference is set when the initial find is sent.
         self.__read_preference = None
         self.__read_concern = collection.read_concern
